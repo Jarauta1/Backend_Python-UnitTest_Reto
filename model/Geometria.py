@@ -39,7 +39,7 @@ class Geometria:
         if case == 2:
             self.figuraName = "Circulo"
         if case == 3:
-            self.figuraName = "Tiangulo"
+            self.figuraName = "Triangulo"
         if case == 4:
             self.figuraName = "Rectangulo"
         if case == 5:
@@ -57,7 +57,7 @@ class Geometria:
         sw = {
             1: self.areaCuadrado(self.a),
             2: self.areaCirculo(self.a),
-            3: self.areaTiangulo(self.a, self.b),
+            3: self.areaTriangulo(self.a, self.b),
             4: self.areaRectangulo(self.a, self.b),
             5: self.areaPentagono(self.a, self.b),
             6: self.areaRombo(self.a, self.b),

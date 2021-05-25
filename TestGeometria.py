@@ -16,10 +16,12 @@ class TestGeometria(unittest.TestCase):
 
     def setUp(self):
         print('setUp - OK')
+        global object_test
         #Preparamos variables para pasar valores a las funciones y testearlas
         self.r = []
         self.a = [1, 2, 3, 4, 5, 6, 7, 8]
         self.b = [8, 7, 6, 5, 4, 3, 2, 1]
+        object_test = g(2,3,4)
 
     def test_areaCuadrado(self):
         # Ejecutamos la función a testear con la tabla de valores que deseamos y guardamos los resultados que nos devuelve en la tabla "r"
@@ -87,25 +89,37 @@ class TestGeometria(unittest.TestCase):
         print("test_areaTrapecio() -> OK")
 
     def test_set_figuraName(self):
-        result = [v.select(self, n) for n in self.a]
-        print(result)
-        self.assertEqual(result, [1, 4, 9, 16, 25, 36, 49, 64])
-
-        self.assertEqual(r, ["Cuadrado", "Circulo", "Tiangulo", "Rectangulo", "Pentagono", "Rombo", "Romboide",
-                             "Trapecio"])
+        # Ejecutamos la función a testear con el objeto creado previamente y guardamos los resultados de los casos que nos devuelve en la tabla "r"
+        for n in self.a:
+            object_test.set_figuraName(n)
+            self.r.append(object_test.figuraName)
+        # Comparamos los resultados obtenidos y los esperados
+        self.assertEqual(self.r, ["Cuadrado","Circulo","Triangulo","Rectangulo","Pentagono","Rombo","Romboide","Trapecio"])
+        print("test_set_figuraName() -> OK")
 
     def test_switch(self):
-        result = [g.switch(self, n) for n in self.a]
-        self.assertEqual(result, [1, 4, 9, 16, 25, 36, 49, 64])
-        self.assertEqual(r, ["Cuadrado", "Circulo", "Tiangulo", "Rectangulo", "Pentagono", "Rombo", "Romboide",
-                             "Trapecio"])
+        for n in self.a:
+            result = object_test.switch(n)
+            self.r.append(result)
+        self.assertEqual(self.r, [4, 12.5664, 3, 6, 3, 3, 6, 10])
+        print("test_swtich() -> OK")
+
+    def test_select(self):
+        # Ejecutamos la función a testear con el objeto creado previamente y guardamos los resultados de todas sus funciones (cálculo de areas) que nos devuelve en la tabla "r"
+        for n in self.a:
+            v.case = n
+            object_test.set_figuraName(v.case)
+            self.r.append(object_test.switch(v.case))
+        # Comparamos los resultados obtenidos y los esperados
+        self.assertEqual(self.r, [4, 12.5664, 3, 6, 3, 3, 6, 10])
+        print("test_select() -> OK")
 
     def tearDown(self):
         print('tearDown - OK')
+        # Borramos las variables
         del self.a
         del self.b
         del self.r
-
 
 if __name__ == '__main__':
     unittest.main()
