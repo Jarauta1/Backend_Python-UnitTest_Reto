@@ -98,9 +98,11 @@ class TestGeometria(unittest.TestCase):
         print("test_set_figuraName() -> OK")
 
     def test_switch(self):
+        # Ejecutamos la función a testear con el objeto creado previamente y guardamos los resultados de todas sus funciones (cálculo de areas) que nos devuelve en la tabla "r"
         for n in self.a:
             result = object_test.switch(n)
             self.r.append(result)
+        # Comparamos los resultados obtenidos y los esperados
         self.assertEqual(self.r, [4, 12.5664, 3, 6, 3, 3, 6, 10])
         print("test_swtich() -> OK")
 
